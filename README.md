@@ -42,11 +42,12 @@
 - **Ready for deploy**: Railway configuration and instructions included.
 - **Real demo**: you can show the working webapp without complex setup.
 
+
 ## Quick Deploy on Railway
 
 1. Login at https://railway.app
 2. Click "New Project" > "Deploy from GitHub repo" and select this repository.
-3. Railway will automatically detect the `railway.json` file and configure build and start.
+3. Railway will automatically detect it as a PHP/Laravel project and run `composer install` and `php artisan serve` by default.
 4. Go to "Variables" and add at least:
 	- `APP_KEY` (generate locally with `php artisan key:generate --show`)
 	- `APP_ENV=production`
