@@ -16,10 +16,10 @@ class OrderController extends Controller
         $agents = json_decode(file_get_contents(storage_path('demo-data/agents.json')), true);
         $details = json_decode(file_get_contents(storage_path('demo-data/order_details.json')), true);
 
-        $order = collect($orders)->firstWhere('id', $id);
-    $cliente = collect($customers)->firstWhere('id', $order['customer_id']);
-    $agent = collect($agents)->firstWhere('id', $order['agent_id']);
-    $order_details = collect($details)->where('order_id', $order['id'])->all();
+    $order = collect($orders)->firstWhere('id', $id);
+    $cliente = isset($order['customer_id']) ? collect($customers)->firstWhere('id', $order['customer_id']) : null;
+    $agent = isset($order['agent_id']) ? collect($agents)->firstWhere('id', $order['agent_id']) : null;
+    $order_details = isset($order['id']) ? collect($details)->where('order_id', $order['id'])->all() : [];
     $available_price = collect($order_details)->filter(function($d){ return ($d['stock'] ?? 0) > ($d['qty'] ?? 0); })->sum('price');
     $topay_price = collect($order_details)->filter(function($d){ return ($d['status'] ?? 0) < 5; })->sum('price');
 
