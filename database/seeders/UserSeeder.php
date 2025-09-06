@@ -15,14 +15,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // Demo user
-        User::create([
-            'name' => 'Demo User',
-            'email' => 'demo@demo.com',
-            'password' => Hash::make('demo'),
-        ]);
-
-        // Altri utenti di esempio
-        User::factory(5)->create();
+    // Seeder disabled for demo: no SQL operations
     }
 }
