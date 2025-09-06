@@ -209,78 +209,46 @@
     <tbody>
         @foreach ($orders as $order)
             <tr>
-                <th scope="row">{{ $order->id }}</th>
-                <td>{{ $order->registered_at }}</td>
+                <th scope="row">{{ $order['id'] }}</th>
+                <td>-</td>
                 <td>
-                    @switch($order->status)
-                        @case(0)
-                            OPEN
-                            @break
-                        @case(1)
-                            PARTIAL
-                            @break
-                        @case(2)
-                            COMPLETED
-                            @break
-                        @default
-                            -
-                    @endswitch
-                </td>
-                <td>
-                    @if(Illuminate\Support\Arr::exists($agents,$order->agent_id))
-                        {{ $agents[$order->agent_id]->name }}
+                    @if($order['status'] === 'in lavorazione')
+                        IN PROGRESS
+                    @elseif($order['status'] === 'completato')
+                        COMPLETED
                     @else
-                        {{$order->agent_info}} 
+                        -
                     @endif
                 </td>
                 <td>
-                    @if($order->customer_code == '11')
-                        AGG
-                    @elseif(Illuminate\Support\Arr::exists($customers,$order->customer_code))
-                        {{ $customers[$order->customer_code]->name }}
+                    @if(isset($agents[$order['agent_id']]))
+                        {{ $agents[$order['agent_id']]['name'] }}
                     @else
-                        {{$order->customer_info}} 
+                        -
                     @endif
                 </td>
                 <td>
-                    
-                    @if(Illuminate\Support\Arr::exists($customers,$order->customer_code))
-                        {{ $customers[$order->customer_code]->city }}
+                    @if(isset($customers[$order['customer_id']]))
+                        {{ $customers[$order['customer_id']]['name'] }}
                     @else
-                        N/A  
+                        -
                     @endif
-
                 </td>
-                <td>{{ $order->final_price }} €</td>
+                <td>
+                    @if(isset($customers[$order['customer_id']]) && isset($customers[$order['customer_id']]['city']))
+                        {{ $customers[$order['customer_id']]['city'] }}
+                    @else
+                        N/A
+                    @endif
+                </td>
+                <td>{{ $order['total'] }} €</td>
                 <td>
                     <div class="progress" style="height: 20px">
-                        @if ($order->perc_complete == 100)
-                            <div class="progress-bar " 
-                            style="color:white !important;background-color:green;width: {{$order->perc_complete}}%;" 
-                            role="progressbar"aria-valuenow="{{$order->perc_complete}}" 
-                            aria-valuemin="0" aria-valuemax="100">
-                                {{$order->perc_complete}}%
-                            </div>
-                        @elseif ($order->perc_complete < 30)
-                            <div class="progress-bar " 
-                            style="color:white !important;background-color:red;" 
-                            role="progressbar" aria-valuenow="{{$order->perc_complete}}" 
-                            aria-valuemin="0" aria-valuemax="100">
-                                {{$order->perc_complete}}%
-                            </div>
-                        @else
-                            <div class="progress-bar " 
-                            style="color:white !important;background-color:orange;width: {{$order->perc_complete}}%;" 
-                            role="progressbar" aria-valuenow="{{$order->perc_complete}}" 
-                            aria-valuemin="0" aria-valuemax="100">
-                                {{$order->perc_complete}}%
-                            </div>
-                        @endif
-                        
+                        <div class="progress-bar " style="color:white !important;background-color:orange;width: 100%;" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
                     </div>
                 </td>
                 <td>
-                    <a href="order/{{$order->id}}">
+                    <a href="order/{{$order['id']}}">
                         <i style="cursor:pointer" class="fa-solid fa-magnifying-glass"></i>
                     </a>
                 </td>
