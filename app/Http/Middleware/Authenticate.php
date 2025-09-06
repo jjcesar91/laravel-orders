@@ -16,10 +16,20 @@ class Authenticate extends Middleware
     {
         // Se la sessione contiene 'user', consideriamo autenticato (demo JSON)
         if (session('user')) {
+            // Non fare nulla, lascia passare
             return null;
         }
+        // Se NON autenticato, reindirizza a login
         if (! $request->expectsJson()) {
             return route('login');
         }
+    }
+    public function handle($request, \Closure $next, ...$guards)
+    {
+        // Demo JSON: se c'è session('user'), lascia passare
+        if (session('user')) {
+            return $next($request);
+        }
+        return parent::handle($request, $next, ...$guards);
     }
 }
