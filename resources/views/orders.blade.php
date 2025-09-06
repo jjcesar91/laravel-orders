@@ -53,7 +53,7 @@
         <div class="card card-custom bg-light gutter-b">
             <div class="card-body">
                 <div class="d-flex flex-column text-dark-75">
-                    <span class="font-weight-bolder font-size-sm"><h4>N. Ordini</h4></span>
+                    <span class="font-weight-bolder font-size-sm"><h4>No. Orders</h4></span>
                     <span class="font-weight-bolder font-size-h5">
                     <span class="text-dark-50 font-weight-bold"></span><h5> {{$count}}</h5></span>
                 </div>
@@ -66,7 +66,7 @@
         <div class="card card-custom bg-light gutter-b">
             <div class="card-body">
                 <div class="d-flex flex-column text-dark-75">
-                    <span class="font-weight-bolder font-size-sm"><h4>Prezzo totale</h4></span>
+                    <span class="font-weight-bolder font-size-sm"><h4>Total Price</h4></span>
                     <span class="font-weight-bolder font-size-h5">
                     <span class="text-dark-50 font-weight-bold"></span><h5>€ {{number_format($totprice,2)}}</h5></span>
                 </div>
@@ -79,7 +79,7 @@
         <div class="card card-custom bg-light gutter-b">
             <div class="card-body">
                 <div class="d-flex flex-column text-dark-75">
-                    <span class="font-weight-bolder font-size-sm"><h4>Ordini 100%</h4></span>
+                    <span class="font-weight-bolder font-size-sm"><h4>100% Orders</h4></span>
                     <span class="font-weight-bolder font-size-h5">
                     <span class="text-dark-50 font-weight-bold"></span><h5>{{$av_orders}}</h5></span>
                 </div>
@@ -92,7 +92,7 @@
         <div class="card card-custom bg-light gutter-b">
             <div class="card-body">
                 <div class="d-flex flex-column text-dark-75">
-                    <span class="font-weight-bolder font-size-sm"><h4>Ordini completati</h4></span>
+                    <span class="font-weight-bolder font-size-sm"><h4>Completed Orders</h4></span>
                     <span class="font-weight-bolder font-size-h5">
                     <span class="text-dark-50 font-weight-bold"></span><h5>{{$done_orders}}</h5></span>
                 </div>
@@ -103,15 +103,15 @@
     
 </div>
 <div class="main">
-<h4>Filtri</h4>
+<h4>Filters</h4>
 <form action="/orders" method="GET">
 <div class="row filters">
     <div class="col-sm-6 col-md-3">
         <div class="form-group row">
-            <label for="inputPassword" class="col-3 col-form-label">Agente</label>
+            <label for="inputPassword" class="col-3 col-form-label">Agent</label>
             <div class="col-9">
                 <select name="agent" class="form-control">
-                    <option value="" selected>TUTTI</option>
+                    <option value="" selected>ALL</option>
                     @foreach ($agents as $agent)
                         <option value="{{ $agent->id }}"
                             @if(isset($filter['agent']) && $filter['agent'] == $agent->id) selected  @endif
@@ -123,10 +123,10 @@
     </div>
     <div class="col-sm-6 col-md-3">
         <div class="form-group row">
-            <label for="inputPassword" class="col-3 col-form-label">Cliente</label>
+            <label for="inputPassword" class="col-3 col-form-label">Customer</label>
             <div class="col-9">
                 <select name="customer" class="form-control">
-                    <option value="" selected>TUTTI</option>
+                    <option value="" selected>ALL</option>
                     @foreach ($customers as $customer)
                         <option value="{{ $customer->code }}"
                             @if(isset($filter['customer']) && $filter['customer'] == $customer->code) selected  @endif
@@ -138,16 +138,16 @@
     </div>
     <div class="col-sm-6 col-md-3">
         <div class="form-group row">
-            <label for="inputPassword" class="col-3 col-form-label">Stato</label>
+            <label for="inputPassword" class="col-3 col-form-label">Status</label>
             <div class="col-9">
                 <select name="status" class="form-control">
-                    <option value="">TUTTI</option>
+                    <option value="">ALL</option>
                     <option @if(isset($filter['status']) && $filter['status'] == "0") selected  @endif
-                    value="0">APERTO</option>
+                    value="0">OPEN</option>
                     <option @if(isset($filter['status']) && $filter['status'] == "1") selected  @endif
-                    value="1">PARZIALE</option>
+                    value="1">PARTIAL</option>
                     <option @if(isset($filter['status']) && $filter['status'] == "2") selected  @endif
-                    value="2">COMPLETATO</option>
+                    value="2">COMPLETED</option>
                 </select>
             </div>
         </div>
@@ -156,7 +156,7 @@
 <div class="row filters">
     <div class="col-sm-6 col-md-3">
         <div class="form-group row">
-            <label for="inputPassword" class="col-3 col-form-label">Prezzo</label>
+            <label for="inputPassword" class="col-3 col-form-label">Price</label>
             <div class="col-4">
                 <input type="text" name="min-price" 
                 @if(isset($filter['min-price'])) value="{{$filter['min-price']}}"  @endif
@@ -185,8 +185,8 @@
         </div>
     </div>
     <div class="col-sm-6 col-md-3">
-        <button class="btn btn-primary">Filtra</button>
-        <a href="/orders" class="btn btn-danger">Reset</a>
+    <button class="btn btn-primary">Filter</button>
+    <a href="/orders" class="btn btn-danger">Reset</a>
     </div>
 
 </div>
@@ -196,13 +196,13 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Data ordine</th>
-        <th scope="col">Stato<br>Gestionale</th>
-        <th scope="col">Agente</th>
-        <th scope="col">Cliente</th>
-        <th scope="col">Destinazione</th>
-        <th scope="col">Prezzo</th>
-        <th scope="col">% Stock</th>
+    <th scope="col">Order Date</th>
+    <th scope="col">Status</th>
+    <th scope="col">Agent</th>
+    <th scope="col">Customer</th>
+    <th scope="col">Destination</th>
+    <th scope="col">Price</th>
+    <th scope="col">% Stock</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -214,13 +214,13 @@
                 <td>
                     @switch($order->status)
                         @case(0)
-                            APERTO
+                            OPEN
                             @break
                         @case(1)
-                            PARZIALE
+                            PARTIAL
                             @break
                         @case(2)
-                            COMPLETATO
+                            COMPLETED
                             @break
                         @default
                             -

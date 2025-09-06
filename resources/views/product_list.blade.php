@@ -52,11 +52,11 @@
         <thead>
         <tr>
             <th scope="col">SKU</th>
-            <th scope="col">Descrizione</th>
-            <th scope="col">ordini<br>da evadere</th>
-            <th scope="col">qty<br>impegnata</th>
-            <th scope="col">stock<br>magazzino</th>
-            <th scope="col">qty<br>disponibile</th>
+            <th scope="col">Description</th>
+            <th scope="col">Orders<br>to fulfill</th>
+            <th scope="col">Qty<br>reserved</th>
+            <th scope="col">Warehouse<br>stock</th>
+            <th scope="col">Qty<br>available</th>
         </tr>
         </thead>
         <tbody>

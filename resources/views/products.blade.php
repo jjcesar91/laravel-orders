@@ -46,15 +46,15 @@
 
 @section('content')
 <div class="main">
-    <h4>Filtri</h4>
+    <h4>Filters</h4>
     <form action="/products" method="GET">
     <div class="row filters">
         <div class="col-sm-6 col-md-3">
             <div class="form-group row">
-                <label for="inputPassword" class="col-3 col-form-label">Articoli</label>
+                <label for="inputPassword" class="col-3 col-form-label">Items</label>
                 <div class="col-9">
                     <select name="agent" class="form-control">
-                        <option value="" selected>TUTTI</option>
+                        <option value="" selected>ALL</option>
                     </select>
                 </div>
             </div>
@@ -66,11 +66,11 @@
         <thead>
         <tr>
             <th scope="col">SKU</th>
-            <th scope="col">Descrizione</th>
-            <th scope="col">ordini<br>da evadere</th>
-            <th scope="col">qty<br>impegnata</th>
-            <th scope="col">stock<br>magazzino</th>
-            <th scope="col">qty<br>disponibile</th>
+            <th scope="col">Description</th>
+            <th scope="col">Orders<br>to fulfill</th>
+            <th scope="col">Qty<br>reserved</th>
+            <th scope="col">Warehouse<br>stock</th>
+            <th scope="col">Qty<br>available</th>
         </tr>
         </thead>
         <tbody>

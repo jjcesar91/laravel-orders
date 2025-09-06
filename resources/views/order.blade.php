@@ -75,23 +75,23 @@
                     <span class="font-weight-bolder font-size-sm"><h3>
                         @switch($order->status)
                             @case(0)
-                                APERTO
+                                OPEN
                                 @break
                             @case(1)
-                                PARZIALE
+                                PARTIAL
                                 @break
                             @case(2)
-                                COMPLETATO
+                                COMPLETED
                                 @break
                             @default
                                 -
                         @endswitch
                     </h3></span>
                     @if($order->status == 1)
-                        <span class="font-weight-bolder font-size-sm"><h6>Importo da saldare</h6></span>
-                        <span class="text-dark-50 font-weight-bold"></span><h5>€ {{number_format($topay_price, 2)}}</font>  <small>di € {{number_format($order->final_price, 2)}} </small></h5></span>
+                        <span class="font-weight-bolder font-size-sm"><h6>Amount to pay</h6></span>
+                        <span class="text-dark-50 font-weight-bold"></span><h5>€ {{number_format($topay_price, 2)}}</font>  <small>of € {{number_format($order->final_price, 2)}} </small></h5></span>
                     @endif
-                    <span class="font-weight-bolder font-size-sm"><h6>Importo fatturabile</h6></span>
+                    <span class="font-weight-bolder font-size-sm"><h6>Invoiceable amount</h6></span>
                     <span class="text-dark-50 font-weight-bold"></span><h5 >
                         @if ($order->perc_complete == 100)
                         <font style="color:green">
@@ -101,7 +101,7 @@
                         <font style="color:orange">
                         @endif
                         
-                        € {{number_format($available_price, 2)}}</font>  <small>di € {{number_format($order->final_price, 2)}} </small></h5></span>
+                        € {{number_format($available_price, 2)}}</font>  <small>of € {{number_format($order->final_price, 2)}} </small></h5></span>
                     <span class="text-dark-50 font-weight-bold" >
                         <div class="progress">
                             @if ($order->perc_complete == 100)
@@ -128,8 +128,8 @@
                             @endif
                         </div>
                     </span><br>
-                    <span class="text-dark-50 font-weight-bold"></span>Pagamento: <h6>{{$order->pay_info}} </h6></span>
-                    <span class="text-dark-50 font-weight-bold"></span>Note: <h6>{{$order->notes}} </h6></span>
+                    <span class="text-dark-50 font-weight-bold"></span>Payment: <h6>{{$order->pay_info}} </h6></span>
+                    <span class="text-dark-50 font-weight-bold"></span>Notes: <h6>{{$order->notes}} </h6></span>
                 </div>
             </div>
         </div>
@@ -138,19 +138,19 @@
     
 </div>
 <div class="main">
-<h4>Filtri</h4>
+<h4>Filters</h4>
 
 <table class="table" id="table_id">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">SKU</th>
-        <th scope="col">Descrizione</th>
-        <th scope="col">Qta</th>
-        <th scope="col">Prezzo Unit</th>
-        <th scope="col">Prezzo Tot</th>
-        <th scope="col">Stock<br>Attuale</th>
-        <th scope="col">Stato</th>
+        <th scope="col">Description</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Unit Price</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">Current<br>Stock</th>
+        <th scope="col">Status</th>
       </tr>
     </thead>
     <tbody>
@@ -166,25 +166,25 @@
                 <td>
                     @switch($detail->status)
                         @case(0)
-                            NON LAVORATO
+                            NOT PROCESSED
                             @break
                         @case(1)
-                            NON LAVORATO
+                            NOT PROCESSED
                             @break
                         @case(2)
-                            NON LAVORATO
+                            NOT PROCESSED
                             @break
                         @case(3)
-                            NON LAVORATO
+                            NOT PROCESSED
                             @break
                         @case(4)
-                            IN PREPARAZIONE
+                            IN PREPARATION
                             @break
                         @case(5)
-                            BOLLETTATA
+                            SHIPPED
                             @break
                         @case(6)
-                            FATTURATA
+                            INVOICED
                             @break
                         @default
                             -

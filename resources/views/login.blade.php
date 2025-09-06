@@ -113,21 +113,21 @@
             @error('email')
             <div class="error-txt">{{ $message }}</div>
             @enderror
-  
+
           <label for="psw" ><b>PASSWORD</b></label>
           <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="off">
             @error('password')
             <div class="error-txt">{{ $message }}</div>
             @enderror
               
-          <button type="submit" class="btn-submit">ACCEDI</button>
+          <button type="submit" class="btn-submit">LOGIN</button>
           <label>
-          <input type="checkbox" checked="checked" name="remember"> Ricordati di me
+          <input type="checkbox" checked="checked" name="remember"> Remember me
           </label>
       </div>
   
-      <div class="container" style="margin-bottom:40px">
-          <span class="psw">Hai dimenticato la <a href="#">password?</a></span>
-      </div>
+    <div class="container" style="margin-bottom:40px">
+      <span class="psw">Forgot your <a href="#">password?</a></span>
+    </div>
   </form>
   @endsection

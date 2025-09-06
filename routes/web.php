@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('/home', [OrderController::class, 'orders']);
 
-    Route::get('/orders', [OrderController::class, 'orders'])->name('home');
+    Route::get('/orders', [OrderController::class, 'orders'])->name('orders');
 
     Route::post('/orders', [OrderController::class, 'orders']);
 
