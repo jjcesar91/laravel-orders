@@ -1,3 +1,64 @@
+# Laravel Orders Demo
+
+**Laravel Orders** is a demo webapp built with Laravel 8 that simulates the management of orders, customers, agents, warehouses, and products, without any database required. All data is managed via JSON files, making the project plug-and-play and easily deployable on Railway or any PHP hosting.
+
+## Main Features
+
+- **Login & Registration**: Demo authentication with data stored in `storage/demo-data/users.json`.
+- **Order Management**: View orders, details, status, amounts, and related customers.
+- **Customer & Agent Management**: Customer and agent registry, all from JSON files.
+- **Warehouse & Product Management**: View products, quantities, prices, and warehouses.
+- **Filters & Search**: Filter orders by agent, customer, status, price, completion percentage.
+- **No Database Needed**: No MySQL connection required, perfect for showcase and testing.
+- **Plug-and-play Deploy**: Ready for Railway, just connect the repo and set environment variables.
+- **Clean, Commented Code**: MVC architecture, controllers adapted to work with static data, easy to extend for real backends.
+
+## Technologies Used
+
+- **Laravel 8** (no Eloquent, only controllers and views)
+- **Blade** for views
+- **Bootstrap** for UI (customizable)
+- **PHP 8+**
+
+## How it Works
+
+- All data (users, orders, customers, agents, warehouses, details) is in `/storage/demo-data/*.json`.
+- Demo login: `demo@demo.com` / password: `demo` (you can register new demo users)
+- No database writes: registration adds users to the JSON file.
+- Update functions (stock, status, etc.) are simulated and do not change real data.
+
+## Example Screens
+
+- Login and registration
+- Orders list with filters
+- Order detail with products and status
+- Customer and agent registry
+- Product and warehouse list
+
+## Why Use It as a Portfolio
+
+- **Showcases adaptability**: conversion of a Laravel project from database to static files for plug-and-play demo.
+- **Clean architecture**: separated controllers, views, and models, easy to extend.
+- **Ready for deploy**: Railway configuration and instructions included.
+- **Real demo**: you can show the working webapp without complex setup.
+
+## Quick Deploy on Railway
+
+1. Login at https://railway.app
+2. Click "New Project" > "Deploy from GitHub repo" and select this repository.
+3. Railway will automatically detect the `railway.json` file and configure build and start.
+4. Go to "Variables" and add at least:
+	- `APP_KEY` (generate locally with `php artisan key:generate --show`)
+	- `APP_ENV=production`
+	- `APP_DEBUG=false`
+5. Make sure the root is the `public/` folder.
+6. Start the deploy: Railway will install dependencies and launch the PHP server.
+
+---
+
+**Author:** Julio Cesar Plascencia Bierd
+
+For questions or collaborations, contact me on Upwork!
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">

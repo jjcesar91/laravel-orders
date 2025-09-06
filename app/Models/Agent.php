@@ -2,14 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Agent extends Model
+class Agent
 {
-    use HasFactory;
-
-    public function orders() {
-        return $this->hasMany('App\Models\Order');
-    }
+    // Dummy class for compatibility
 }

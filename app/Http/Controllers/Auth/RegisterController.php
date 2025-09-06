@@ -59,9 +59,18 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-        //$this->validator($request->all())->validate();
-        $this->create($request->all());
-        return redirect("login");
+        $data = $request->only(['name', 'email', 'password']);
+        $usersFile = storage_path('demo-data/users.json');
+        $users = json_decode(file_get_contents($usersFile), true);
+        $exists = collect($users)->firstWhere('email', $data['email']);
+        if ($exists) {
+            session()->flash('error', 'Email già registrata');
+            return redirect('register');
+        }
+        $data['id'] = collect($users)->max('id') + 1;
+        $users[] = $data;
+        file_put_contents($usersFile, json_encode($users, JSON_PRETTY_PRINT));
+        return redirect('login');
     }
   
     /**
@@ -72,10 +81,11 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // Demo: validazione semplificata
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string'],
         ]);
     }
   

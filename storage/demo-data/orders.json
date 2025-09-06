@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "customer_id": 1,
+    "status": "in lavorazione",
+    "total": 120.50
+  },
+  {
+    "id": 2,
+    "customer_id": 2,
+    "status": "completato",
+    "total": 75.00
+  }
+]
