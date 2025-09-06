@@ -62,12 +62,12 @@
         <tbody>
             @foreach ($skus as $sku)
                 <tr>
-                    <td>{{$sku}}</td>
-                    <td>{{$products[$sku][0]->description}}</td>
-                    <td>{{$products[$sku]->count()}}</td>
-                    <td>{{$products[$sku]->sum('qty')}}</td>
-                    <td>{{$products[$sku][0]->stock}}</td>
-                    <td>{{$products[$sku][0]->stock-$products[$sku]->sum('qty')}}</td>
+                    <td>{{ $sku }}</td>
+                    <td>{{ $products[$sku][0]['description'] ?? '' }}</td>
+                    <td>{{ count($products[$sku]) }}</td>
+                    <td>{{ collect($products[$sku])->sum('qty') }}</td>
+                    <td>{{ $products[$sku][0]['stock'] ?? '' }}</td>
+                    <td>{{ isset($products[$sku][0]['stock']) ? $products[$sku][0]['stock'] - collect($products[$sku])->sum('qty') : '' }}</td>
                 </tr>
             @endforeach
         </tbody>

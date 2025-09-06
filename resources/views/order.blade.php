@@ -156,15 +156,15 @@
     <tbody>
         @foreach ($details as $detail)
             <tr>
-                <td>{{$detail->order_row}}</td>
-                <td>{{$detail->sku}}</td>
-                <td>{{$detail->description}}</td>
-                <td>{{$detail->qty}}</td>
-                <td>€ {{number_format($detail->price_unit,2)}}</td>
-                <td>€ {{number_format($detail->price_tot, 2)}}</td>
-                <td>{{$detail->stock}}</td>
+                <td>{{ $detail['order_row'] ?? '' }}</td>
+                <td>{{ $detail['sku'] ?? '' }}</td>
+                <td>{{ $detail['description'] ?? '' }}</td>
+                <td>{{ $detail['qty'] ?? '' }}</td>
+                <td>€ {{ isset($detail['price_unit']) ? number_format($detail['price_unit'],2) : '' }}</td>
+                <td>€ {{ isset($detail['price_tot']) ? number_format($detail['price_tot'],2) : '' }}</td>
+                <td>{{ $detail['stock'] ?? '' }}</td>
                 <td>
-                    @switch($detail->status)
+                    @switch($detail['status'] ?? null)
                         @case(0)
                             NOT PROCESSED
                             @break
@@ -189,11 +189,7 @@
                         @default
                             -
                     @endswitch
-                
-                
-                
                 </td>
-                
             </tr>
         @endforeach
     </tbody>

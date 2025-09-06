@@ -113,9 +113,9 @@
                 <select name="agent" class="form-control">
                     <option value="" selected>ALL</option>
                     @foreach ($agents as $agent)
-                        <option value="{{ $agent->id }}"
-                            @if(isset($filter['agent']) && $filter['agent'] == $agent->id) selected  @endif
-                        >{{ $agent->name }}</option>
+                        <option value="{{ $agent['id'] }}"
+                            @if(isset($filter['agent']) && $filter['agent'] == $agent['id']) selected  @endif
+                        >{{ $agent['name'] }}</option>
                     @endforeach
                 </select>
             </div>
@@ -128,9 +128,9 @@
                 <select name="customer" class="form-control">
                     <option value="" selected>ALL</option>
                     @foreach ($customers as $customer)
-                        <option value="{{ $customer->code }}"
-                            @if(isset($filter['customer']) && $filter['customer'] == $customer->code) selected  @endif
-                        >{{ $customer->name }}</option>
+                        <option value="{{ $customer['id'] }}"
+                            @if(isset($filter['customer']) && $filter['customer'] == $customer['id']) selected  @endif
+                        >{{ $customer['name'] }}</option>
                     @endforeach
                 </select>
             </div>
@@ -221,21 +221,21 @@
                     @endif
                 </td>
                 <td>
-                    @if(isset($agents[$order['agent_id']]))
+                    @if(isset($order['agent_id']) && isset($agents[$order['agent_id']]))
                         {{ $agents[$order['agent_id']]['name'] }}
                     @else
                         -
                     @endif
                 </td>
                 <td>
-                    @if(isset($customers[$order['customer_id']]))
+                    @if(isset($order['customer_id']) && isset($customers[$order['customer_id']]))
                         {{ $customers[$order['customer_id']]['name'] }}
                     @else
                         -
                     @endif
                 </td>
                 <td>
-                    @if(isset($customers[$order['customer_id']]) && isset($customers[$order['customer_id']]['city']))
+                    @if(isset($order['customer_id']) && isset($customers[$order['customer_id']]) && isset($customers[$order['customer_id']]['city']))
                         {{ $customers[$order['customer_id']]['city'] }}
                     @else
                         N/A
