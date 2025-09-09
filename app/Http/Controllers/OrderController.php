@@ -55,16 +55,32 @@ class OrderController extends Controller
 
     public function product_list(Request $request) {
         $details = collect(json_decode(file_get_contents(storage_path('demo-data/order_details.json')), true));
-        return view('product_list', ['details' => $details]);
+        $products = collect(json_decode(file_get_contents(storage_path('demo-data/products.json')), true))->keyBy('sku');
+        
+        // Raggruppa i dettagli per SKU  
+        $ds_k = $details->groupBy('sku');
+        $keys = $ds_k->keys();
+        
+        return view('product_list', [
+            'details' => $details,
+            'products' => $ds_k,
+            'skus' => $keys->all(),
+            'products_info' => $products
+        ]);
     }
 
     public function products(Request $request) {
         $details = collect(json_decode(file_get_contents(storage_path('demo-data/order_details.json')), true))->filter(function($d){ return ($d['status'] ?? 0) < 5; });
-        $ds_k = $details->groupBy('product');
+        $products = collect(json_decode(file_get_contents(storage_path('demo-data/products.json')), true))->keyBy('sku');
+        
+        // Raggruppa i dettagli per SKU
+        $ds_k = $details->groupBy('sku');
         $keys = $ds_k->keys();
+        
         return view('products', [
             'products' => $ds_k,
-            'skus' => $keys->all()
+            'skus' => $keys->all(),
+            'products_info' => $products
         ]);
     }
 
