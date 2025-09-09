@@ -54,13 +54,13 @@
         <div class="card card-custom bg-light gutter-b">
             <div class="card-body">
                 <div class="d-flex flex-column text-dark-75">
-                    <span class="text-dark-50 font-weight-bold"></span><h6>{{$order->created_at}}</h6></span>
-                    <span class="font-weight-bolder font-size-sm"><h5>@if($cliente) {{$cliente->name}} @else {{$order->customer_info}} @endif</h5></span>
+                    <span class="text-dark-50 font-weight-bold"></span><h6>{{ isset($order['created_at']) ? $order['created_at'] : '-' }}</h6></span>
+                    <span class="font-weight-bolder font-size-sm"><h5>@if($cliente) {{$cliente['name'] ?? ''}} @else {{ $order['customer_info'] ?? '-' }} @endif</h5></span>
                     <span class="font-weight-bolder font-size-h5">
-                    <span class="text-dark-50 font-weight-bold"></span><h6>@if($cliente) {{$cliente->address}} @endif</h6></span>
-                    <span class="text-dark-50 font-weight-bold"></span><h6>@if($cliente) {{$cliente->city}} {{$cliente->zipcode}} {{$cliente->province}} @endif</h6></span>
+                    <span class="text-dark-50 font-weight-bold"></span><h6>@if($cliente) {{$cliente['address'] ?? ''}} @endif</h6></span>
+                    <span class="text-dark-50 font-weight-bold"></span><h6>@if($cliente) {{$cliente['city'] ?? ''}} {{$cliente['zipcode'] ?? ''}} {{$cliente['province'] ?? ''}} @endif</h6></span>
                     <br>
-                    <span class="text-dark-50 font-weight-bold"></span>Agente: <h6>@if($agent) {{$agent->name}} @else {{$order->agent_info}} @endif</h6></span>
+                    <span class="text-dark-50 font-weight-bold"></span>Agente: <h6>@if($agent) {{$agent['name'] ?? ''}} @else {{ $order['agent_info'] ?? '-' }} @endif</h6></span>
 
                 </div>
             </div>
@@ -73,7 +73,7 @@
             <div class="card-body">
                 <div class="d-flex flex-column text-dark-75">
                     <span class="font-weight-bolder font-size-sm"><h3>
-                        @switch($order->status)
+                        @switch($order['status'] ?? null)
                             @case(0)
                                 OPEN
                                 @break
@@ -87,49 +87,49 @@
                                 -
                         @endswitch
                     </h3></span>
-                    @if($order->status == 1)
+                    @if(($order['status'] ?? null) == 1)
                         <span class="font-weight-bolder font-size-sm"><h6>Amount to pay</h6></span>
-                        <span class="text-dark-50 font-weight-bold"></span><h5>€ {{number_format($topay_price, 2)}}</font>  <small>of € {{number_format($order->final_price, 2)}} </small></h5></span>
+                        <span class="text-dark-50 font-weight-bold"></span><h5>€ {{number_format($topay_price, 2)}}</font>  <small>of € {{ isset($order['final_price']) ? number_format($order['final_price'], 2) : '-' }} </small></h5></span>
                     @endif
                     <span class="font-weight-bolder font-size-sm"><h6>Invoiceable amount</h6></span>
                     <span class="text-dark-50 font-weight-bold"></span><h5 >
-                        @if ($order->perc_complete == 100)
+                        @if (($order['perc_complete'] ?? null) == 100)
                         <font style="color:green">
-                        @elseif ($order->perc_complete < 30)
+                        @elseif (($order['perc_complete'] ?? 0) < 30)
                         <font style="color:red">
                         @else
                         <font style="color:orange">
                         @endif
                         
-                        € {{number_format($available_price, 2)}}</font>  <small>of € {{number_format($order->final_price, 2)}} </small></h5></span>
+                        € {{number_format($available_price, 2)}}</font>  <small>of € {{ isset($order['final_price']) ? number_format($order['final_price'], 2) : '-' }} </small></h5></span>
                     <span class="text-dark-50 font-weight-bold" >
                         <div class="progress">
-                            @if ($order->perc_complete == 100)
+                            @if (($order['perc_complete'] ?? null) == 100)
                                 <div class="progress-bar " 
-                                style="color:white !important;background-color:green;width: {{$order->perc_complete}}%;" 
-                                role="progressbar"aria-valuenow="{{$order->perc_complete}}" 
+                                style="color:white !important;background-color:green;width: {{ $order['perc_complete'] ?? 0 }}%;" 
+                                role="progressbar"aria-valuenow="{{ $order['perc_complete'] ?? 0 }}" 
                                 aria-valuemin="0" aria-valuemax="100">
-                                    {{$order->perc_complete}}%
+                                    {{ $order['perc_complete'] ?? 0 }}%
                                 </div>
-                            @elseif ($order->perc_complete < 30)
+                            @elseif (($order['perc_complete'] ?? 0) < 30)
                                 <div class="progress-bar " 
                                 style="color:white !important;background-color:red;" 
-                                role="progressbar" aria-valuenow="{{$order->perc_complete}}" 
+                                role="progressbar" aria-valuenow="{{ $order['perc_complete'] ?? 0 }}" 
                                 aria-valuemin="0" aria-valuemax="100">
-                                    {{$order->perc_complete}}%
+                                    {{ $order['perc_complete'] ?? 0 }}%
                                 </div>
                             @else
                                 <div class="progress-bar " 
-                                style="color:white !important;background-color:orange;width: {{$order->perc_complete}}%;" 
-                                role="progressbar" aria-valuenow="{{$order->perc_complete}}" 
+                                style="color:white !important;background-color:orange;width: {{ $order['perc_complete'] ?? 0 }}%;" 
+                                role="progressbar" aria-valuenow="{{ $order['perc_complete'] ?? 0 }}" 
                                 aria-valuemin="0" aria-valuemax="100">
-                                    {{$order->perc_complete}}%
+                                    {{ $order['perc_complete'] ?? 0 }}%
                                 </div>
                             @endif
                         </div>
                     </span><br>
-                    <span class="text-dark-50 font-weight-bold"></span>Payment: <h6>{{$order->pay_info}} </h6></span>
-                    <span class="text-dark-50 font-weight-bold"></span>Notes: <h6>{{$order->notes}} </h6></span>
+                    <span class="text-dark-50 font-weight-bold"></span>Payment: <h6>{{ $order['pay_info'] ?? '-' }} </h6></span>
+                    <span class="text-dark-50 font-weight-bold"></span>Notes: <h6>{{ $order['notes'] ?? '-' }} </h6></span>
                 </div>
             </div>
         </div>
